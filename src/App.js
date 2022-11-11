@@ -41,16 +41,28 @@ class App extends Component {
     console.log(arr);
   }
 
+  changeArray = (index, value) => {
+    let array = this.state.array;
+    array[index] = value;
+
+    this.setState({
+      array: array,
+      steps: [array],
+      currentStep: 0
+    });
+
+  }
 
   render() { 
     // create the bars of arrays
-    const bars = this.state.array.map((index, value) => {
-      return <Bar key={index} index={index} length={value} />
+    const bars = this.state.array.map((value, index) => {
+      // console.log('idx: ', index, 'val: ', value);
+      return <Bar key={index} index={index} length={value} changeArray={this.changeArray} />
     });
+    console.log(bars);
 
     return (
       <div className="app">
-
         {/* display the bars in a frame */}
         <div className="frame">
           {bars}
